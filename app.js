@@ -103,7 +103,7 @@ function eventRow(list, event) {
   add(row, "span", "song-chevron", "›");
 }
 function renderEvents() {
-  subpage("其它场次", null);
+  subpage("场次列表", null);
   const section = add(app, "section", "panel");
   const search = add(section, "input", "search");
   search.type = "search";
@@ -238,11 +238,11 @@ async function navigate() {
         renderSong(data, song);
       }
     } else throw new Error("页面不存在");
-    document.title = (app.querySelector("h1")?.textContent || "其它场次") + " | VC-KTV";
+    document.title = (app.querySelector("h1")?.textContent || "场次列表") + " | VC-KTV";
     window.scrollTo(0, 0);
   } catch (error) {
     if (version !== viewVersion) return;
-    subpage("其它场次", null);
+    subpage("场次列表", null);
     add(app, "div", "empty", error.message);
   }
 }
