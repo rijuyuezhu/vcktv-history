@@ -1,0 +1,35 @@
+{
+  "20261025-000000-56e89a0a": [
+    {
+      "platform": "bilibili",
+      "label": "B站收藏夹",
+      "url": "https://www.bilibili.com/medialist/detail/ml4446017332"
+    }
+  ],
+  "20261031-085316-98f5fadf": [
+    {
+      "platform": "bilibili",
+      "label": "B站收藏夹",
+      "url": "https://www.bilibili.com/medialist/detail/ml4390107532"
+    }
+  ],
+  "20261108-115648-f50662de": [
+    {
+      "platform": "bilibili",
+      "label": "B站收藏夹",
+      "url": "https://www.bilibili.com/medialist/detail/ml4473623232"
+    },
+    {
+      "platform": "netease",
+      "label": "网易云音乐歌单",
+      "url": "https://music.163.com/#/playlist?id=18576095863"
+    }
+  ],
+  "20261113-111004-5fa21543": [
+    {
+      "platform": "bilibili",
+      "label": "B站收藏夹",
+      "url": "https://www.bilibili.com/medialist/detail/ml4584209432"
+    }
+  ]
+}

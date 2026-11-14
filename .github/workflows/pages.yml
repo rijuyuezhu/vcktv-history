@@ -1,0 +1,57 @@
+name: Publish history site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate and stage static site
+        run: |
+          python3 -m unittest discover -s tests -q
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          events = json.loads(Path("data/events.json").read_text())["events"]
+          assert events
+          for event in events:
+              detail = json.loads((Path("data/events") / (event["id"] + ".json")).read_text())
+              assert len(detail["songs"]) == event["song_count"]
+              for song in detail["songs"]:
+                  assert song["cover"] and Path(song["cover"]).is_file()
+          PY
+          mkdir -p _site
+          cp index.html app.js style.css _site/
+          cp -R icons data covers _site/
+          touch _site/.nojekyll
+      - name: Update gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./_site
+          force_orphan: true
+      # GITHUB_TOKEN commits do not trigger Pages builds.
+      # Deploy the same snapshot directly while preserving gh-pages.
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./_site
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
