@@ -7,7 +7,13 @@
     "song_count": 72,
     "played_count": 47
   },
-  "playlists": [],
+  "playlists": [
+    {
+      "platform": "bilibili",
+      "label": "B站收藏夹",
+      "url": "https://www.bilibili.com/medialist/detail/ml4501006132"
+    }
+  ],
   "songs": [
     {
       "id": 1,
